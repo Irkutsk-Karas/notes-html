@@ -17,6 +17,7 @@ parser.add_argument('name', required=True)
 parser.add_argument('email', required=True)
 parser.add_argument('password', required=True)
 
+
 class UserResource(Resource):
     def get(self, user_id):
         abort_if_user_not_found(user_id)

@@ -48,12 +48,12 @@ def reqister():
         if form.password.data != form.password_again.data:
             return render_template('register.html', title='Регистрация',
                                    form=form,
-                                   message="Пароли не совпадают")
+                                   message="Пароли не одинаковые")
         db_sess = db_session.create_session()
         if db_sess.query(User).filter(User.email == form.email.data).first():
             return render_template('register.html', title='Регистрация',
                                    form=form,
-                                   message="Такой пользователь уже есть")
+                                   message="Такой пользователь уже зарегистрирован")
         user = User(
             name=form.name.data,
             email=form.email.data,
@@ -62,7 +62,7 @@ def reqister():
         db_sess.add(user)
         db_sess.commit()
         return redirect('/login')
-    return render_template('register.html', title='Регистрация', form=form)
+    return render_template('register.html', title='Зарегистрироваться', form=form)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -92,7 +92,7 @@ def add_news():
             'user_id': current_user.id
         })
         return redirect('/')
-    return render_template('news.html', title='Добавление новости',
+    return render_template('news.html', title='Написать о чем-то новом',
                            form=form)
 
 
@@ -117,7 +117,7 @@ def edit_news(note_id):
                      }
                      )
         return redirect('/')
-    return render_template('news.html', title='Редактирование новости',
+    return render_template('news.html', title='Редактирование заметки',
                            form=form)
 
 

@@ -4,7 +4,7 @@
 <h1>Заметки</h1>
 
 {% if current_user.is_authenticated %}
-<a href="note/add" class="btn btn-secondary">Добавить новость</a>
+<a href="note/add" class="btn btn-secondary">Написать о чем-то новом</a>
 {% endif %}
 
 {% for item in notes%}
@@ -14,7 +14,7 @@
         {{item.content}}
     </div>
     <div>
-        Автор - {{item.user.name}}
+         Написал {{item.user.name}}
     </div>
     {% if current_user.is_authenticated and current_user == item.user %}
     <div>
